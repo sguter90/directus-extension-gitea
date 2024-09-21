@@ -1,0 +1,60 @@
+{
+	"name": "directus-extension-gitea",
+	"description": "Gitea integration for directus",
+	"icon": "extension",
+	"version": "0.0.1",
+	"keywords": [
+		"directus",
+		"directus-extension",
+		"directus-extension-bundle",
+		"gitea",
+		"gitea actions",
+		"build",
+		"pipeline"
+	],
+	"type": "module",
+	"files": [
+		"dist"
+	],
+	"directus:extension": {
+		"type": "bundle",
+		"path": {
+			"app": "dist/app.js",
+			"api": "dist/api.js"
+		},
+		"entries": [
+			{
+				"type": "hook",
+				"name": "action-run-status",
+				"source": "src/action-run-status/index.ts"
+			},
+			{
+				"type": "operation",
+				"name": "create-repo-file",
+				"source": {
+					"app": "src/create-repo-file/app.ts",
+					"api": "src/create-repo-file/api.ts"
+				}
+			}
+		],
+		"host": "^10.10.0"
+	},
+	"scripts": {
+		"build": "directus-extension build",
+		"dev": "directus-extension build -w --no-minify",
+		"link": "directus-extension link",
+		"add": "directus-extension add",
+		"bump": "yarn publish"
+	},
+	"devDependencies": {
+		"@directus/extensions-sdk": "12.0.2",
+		"@types/node": "^22.5.5",
+		"typescript": "^5.6.2",
+		"vue": "^3.5.6"
+	},
+	"repository": {
+		"type": "git",
+		"url": "https://github.com/sguter90/directus-extension-gitea"
+	},
+	"license": "MIT"
+}
